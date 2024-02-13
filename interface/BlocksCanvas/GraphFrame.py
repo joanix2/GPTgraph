@@ -1,6 +1,6 @@
 import tkinter as tk
-from interface.Abstract import ClickableObject
-from interface.Block import ClassBlock, FunctionBlock, ParameterBlock, Node, Link
+from interface.BlocksCanvas.Abstract import ClickableObject
+from interface.BlocksCanvas.Block import ClassBlock, FunctionBlock, ParameterBlock, Node, Link
 import inspect
 import json
 

@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import ttk, scrolledtext
-from interface.ListFrame import ListDisplayFrame
+from interface.Utility.ListFrame import ListDisplayFrame
 
 class MainFunctionEditor(tk.Frame):
     def __init__(self, parent, functions, **kwargs):

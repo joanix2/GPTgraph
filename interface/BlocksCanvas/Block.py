@@ -1,4 +1,4 @@
-from interface.Abstract import ClickableObject
+from interface.BlocksCanvas.Abstract import ClickableObject
 from tkinter.font import Font
 import tkinter as tk
 import math

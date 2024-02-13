@@ -1,9 +1,42 @@
 import tkinter as tk
 from tkinter import ttk, scrolledtext
+from interface.Utility.ListFrame import ListDisplayFrame
+
+class MainAgentEditor(tk.Frame):
+    def __init__(self, parent, functions, **kwargs):
+        super().__init__(parent, **kwargs)
+        self.functions = functions
+
+        # Création du ListDisplayFrame pour la liste des fonctions
+        self.list_frame = ListDisplayFrame(self, functions, title="Agents", on_select=self.on_function_select)
+        self.list_frame.pack(side=tk.LEFT, fill=tk.Y, expand=False)
+
+        # Création du AgentEditor pour l'édition des agents
+        self.editor_frame = AgentEditor(self, on_submit=self.add_function)
+        self.editor_frame.pack(side=tk.RIGHT, fill=tk.BOTH, expand=True)
+
+    def add_function(self, name, description):
+        # Créer une nouvelle instance d'agent et l'ajouter à la liste
+        new_function = Agent(name, description)
+        self.list_frame.add_object(new_function)
+
+    def on_function_select(self, function):
+        # Mettre à jour l'éditeur avec les détails de la fonction sélectionnée
+        self.editor_frame.function_name.delete(0, tk.END)
+        self.editor_frame.function_name.insert(0, getattr(function, 'name', ''))
+        self.editor_frame.function_description.delete(0, tk.END)
+        self.editor_frame.function_description.insert(0, getattr(function, 'description', ''))
+
+class Agent:
+    def __init__(self, name, description=""):
+        self.name = name
+        self.description = description
 
 class AgentEditor(tk.Frame):
-    def __init__(self, parent, **kwargs):
+    def __init__(self, parent, on_submit=None, **kwargs):
         super().__init__(parent, **kwargs)
+        self.on_submit = on_submit
+        self.is_edit_mode = False
 
         # Nom de l'agent
         ttk.Label(self, text="Nom de l'agent :").grid(column=0, row=0, sticky=tk.W, padx=5, pady=5)

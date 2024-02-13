@@ -1,10 +1,10 @@
-from interface.Win import AppWin
-
+from interface.Win import MainWin
+from noyaux.kernel import Kernel
 
 def main():
-    app = AppWin()
-    app.mainloop()
+    kern = Kernel()
+    root = MainWin(kern)
+    root.mainloop()
 
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
